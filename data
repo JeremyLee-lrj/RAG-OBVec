@@ -1,0 +1,138 @@
+【ACID】数据库在进行数据更新时，为保证数据的可靠和一致，必须具备的 4 个特性：原子性（atomicity）、一致性（consistency）、隔离性（isolation）、持久性（durability）。
+【Antman（简称 oat-cli）】提供一键部署 OCP、OMS、ODC 等 OceanBase 数据库周边工具平台的 CLI 工具。
+【ASH（Active Session History）】一种活动会话历史记录的诊断工具，用于记录数据库中所有活动会话的信息。
+【ASH 报告（OceanBase Active Session History Report）】能够提供定位瞬时发生异常的分析报告，与性能报告相比，能提供更加细粒度的诊断信息。
+【ASH 报告（OceanBase Active Session History Report）】一般的性能报告所覆盖的是小时级别的快照信息，诊断问题的粒度不能深入到 Session 级别，导致一些瞬时抖动信息很难从性能报告上得到详细的执行细节。
+【ASH 报告（OceanBase Active Session History Report）】因此，我们可以通过 ASH 报告这样一个会话级别的细粒度诊断信息来解决这种问题。
+【保护模式（Protection Mode）】OceanBase 数据库的物理备库仅支持最大性能模式。
+【保护模式（Protection Mode）】关于最大性能模式的详细介绍，参见本文中的 最大性能（Maximum Performance）。
+【备份元数据库/恢复元数据库（Backup Metadb/Restore Metadb）】备份元数据库包含参数表 backup_base_profile 以及控制备份任务的四张表，分别是 base_data_backup、base_data_backup_task、base_data_backup_task_history 和 inc_data_backup。
+【备份元数据库/恢复元数据库（Backup Metadb/Restore Metadb）】恢复元数据库包含控制恢复任务的四张表，分别是 oceanbase_restore、 base_data_restore、inc_data_restore 和 oceanbase_restore_history。
+【备份元数据库/恢复元数据库（Backup Metadb/Restore Metadb）】通常会将备份元数据库和恢复元数据库部署在同一个数据库中。
+【备份元数据库/恢复元数据库（Backup Metadb/Restore Metadb）】该术语在 V4.x 版本废弃。
+【备份工具程序/恢复工具程序（AgentServer/agentrestore.jar）】AgentServer 是备份工具，是一个常驻进程，每隔一段时间查询元数据库 MetaDB 中的 base_data_backup 表有无备份任务，来控制整个基线、增量数据备份的发起、取消，也会随着任务的推进更新备份任务四张表的状态。
+【备份工具程序/恢复工具程序（AgentServer/agentrestore.jar）】agentrestore.jar 是恢复工具，顾名思义是 Java 编写的 Jar 包，也是常驻进程，每隔一段时间查询元数据库 MetaDB 中的控制表，负责调度整个恢复任务的发起，也会随着任务的推进更新恢复任务四张表的状态。
+【备份工具程序/恢复工具程序（AgentServer/agentrestore.jar）】该术语在 V4.x 版本废弃。
+【本地事务（Local Transaction）】是相对于跨机分布式事务而言的，特指事务所操作的表的日志流 Leader 全部在同一个 Server 上，并且与 Session 建立的 Server 具有相同的事务。
+【本地计划（Local Plan）】当执行计划只涉及到单表或分区表的单个分区，且该表或分区在本节点时，该计划为"本地计划"。
+【本地执行（Local Execution）】接收客户端请求生成执行计划的数据库服务器和计划实际执行的服务器是同一个。
+【表（Table）】最基本的数据库对象。
+【表（Table）】每个表由若干行记录组成，每一行有相同的预先定义的列。
+【表（Table）】用户通过 SQL 语句对表进行增、删、查、改等操作。
+【表（Table）】通常，表的若干列会组成一个主键，主键在整个表的数据集合内唯一。
+【表空间（Tablespace）】OceanBase 数据库的加密在形式上尽量兼容 Oracle 数据库，数据的加密单位为表空间（Tablespace）。
+【表空间（Tablespace）】OceanBase 数据库并非一个多数据文件的数据库系统，表空间是为了兼容而设计的概念，可以简单理解为表空间是一组表的集合。
+【表组（Table Group）】对经常会被同时访问的一组表，为了优化性能，需要将它们相同类型的副本存储在同一个 OceanBase 数据库服务器中。
+【表组（Table Group）】通过定义一个 Table Group，并且将这一组表放在这个 Table Group 中来达到这个目的。
+【表组（Table Group）】此外，同一个 Table Group 的多个分区表具有相同的分区数和分区规则。
+【表组（Table Group）】假设一个 Table Group 里的表都有 N 个分区，所有这些表的第 i 个分区的集合组成一个 Partition Group。
+【表组（Table Group）】同一个 Partition Group 里的分区，主副本总是位于同一个 server上。
+【并行查询（Parallel Query）】并行查询是指通过对查询计划的改造，提升对每一个查询计划的 CPU 和 IO 处理能力，从而缩短单个查询的响应时间。
+【并行查询（Parallel Query）】并行查询技术可以用于分布式执行计划，也可以用于本地查询计划。
+【并行合并（Parallel Compaction）】对于不同的数据分区，合并是会并行来做的。
+【并行合并（Parallel Compaction）】但是由于数据倾斜，某些分区的数据量可能非常大。
+【并行合并（Parallel Compaction）】尽管增量合并极大减少了合并的数据量，对于一些更新频繁的业务，合并的数据量仍然非常大，为此 OceanBase 数据库引入了分区内并行合并。
+【并行合并（Parallel Compaction）】合并会将数据划分到不同线程中并行做合并，极大地提升了合并速度。
+【Block Cache】类似于其他数据库系统的 Buffer Cache，缓存具体的数据微块，每个微块都会解压后装载到 Block Cache 中，因此每个 cache 大小都是变长的。
+【BloomFilter Cache】OceanBase 数据库的 BloomFilter 是构建在宏块上的，根据用户实际空查率按需自动构建，当一个宏块上的空查次数超过某个阈值时，就会自动构建 BloomFilter，并将 BloomFilter 放入 Cache。
+【并行执行（Parallel Execution）】一个执行计划在执行前，根据需要访问的分区情况，被切分成一个或者多个任务来执行。
+【并行执行（Parallel Execution）】在执行过程中，调度器可以串行调度计划的多个任务，也可以让多个任务同时被调度执行。
+【并行执行（Parallel Execution）】这种多个任务被同时调度执行的方式称为并行执行。
+【布隆过滤器（Bloom Filter）】布隆过滤器，用于快速判断行在基线数据或转储数据是否存在，当结果为不存在时，可以减少磁盘 IO 和 CPU 消耗。
+【版本升级】指的是 OceanBase 数据库软件的版本升级，需要与 “仲裁升级” 的概念区分开。
+【Clog (Commit Log)】OceanBase 会将包括事务在内的所有对数据库状态的修改操作，以 redo log 的形式记录并通过 Multi-Paxos 一致性协议持久化在集群的多个副本之中。
+【Clog (Commit Log)】这样的一组 redo log 在 OceanBase 中称作 clog。
+【Clog (Commit Log)】Clog 按照日志流进行组织，每个日志流有自己的一组 clog 文件。
+【Clog (Commit Log)】同时，各个租户的 clog 文件是隔离的，每个租户可以设置本租户可以使用的 clog 空间大小。
+【Clog (Commit Log)】Clog 既用于在数据库实例故障的场景下保证数据库的持久性和原子性，同时也用于备节点、物理备库、Change Data Capture 等多个数据库功能实时获取数据库的状态变更操作。
+【CDC（Change Data Capture，即变更数据捕获）】CDC 是一种用于捕获和记录数据库中数据变更的技术。
+【CDC（Change Data Capture，即变更数据捕获）】当数据库中的数据发生变化时（例如插入、更新或删除数据），CDC 技术会按照变更发生的顺序捕获变更并记录下来，以便其他系统可以及时地处理和使用这些最新的数据。
+【磁盘静默错误（Silent Data Corruption）】是指存储系统向应用程序提供损坏的数据，而未发出任何警告。
+【磁盘静默错误（Silent Data Corruption）】例如由于介质损坏，磁盘中出现了坏块，在应用程序读取该块的时候，就会读到错误的数据。
+【查询改写（Query Rewrite）】通过对用户查询做等价的改写以便优化器生成最佳执行计划的过程。
+【存储过程（Stored Procedure）】服务器端提供的用户编程方式。
+【Data Flow Object (DFO)】并行计划以数据重分布点为边界，切分为可以并行执行的逻辑子计划，每个子计划由一个 DFO 进行封装。
+【Data Transfer Layer (DTL)】数据传输层，分布式并行执行框架中用于提供各执行线程之间数据传输的网络传输框架。
+【DBaaS（Database as a service）】数据库即服务，是指客户直接通过 SaaS 服务模式来采购方式采购数据库云服务。
+【DBaaS（Database as a service）】数据库云服务商拥有所有的资源，包括底层的 IAAS，数据库软件，客户对于底层资源不感知，由数据库云服务商负责运维整个数据库产品，其实 DBaaS 是 SaaS 服务的一种。
+【DIO（Direct Input-output）】绕过操作系统 page cache 的读写文件方法。
+【单机版（Standalone Edition）】OceanBase 数据库的单机分布式一体化架构的数据库形态。
+【DOOBA】OceanBase 数据库内部的一个运维脚本，用于性能监控，使用 Python 语言开发，且仅支持 Python 2.7。
+【DOOBA】DOOBA 的原理是使用 MySQL 命令连接到 OceanBase 的 SYS 租户中，实时展示租户 SQL 的 QPS（包括 select、update、insert、delete、commit）以及相应 SQL 的平均延时（RT）。
+【DOOBA】同时还可以展示各个节点的 SQL 的 QPS 以及 RT 等。
+【大版本冻结（Major Freeze）】集群中所有的节点在一个统一的快照点冻结当前的活跃 MemTable，不再接受新开启事务的写操作，新事务的写操作在新的活跃 MemTable 中进行。
+【大版本冻结版本号（Major Freeze Version）】大版本冻结的版本号。
+【冻结版本（Frozen Version）】发生冻结操作时的版本号。
+【地域（Region）】Region 是指一个地域或城市，而一个 Region 可能包含一个或多个 Zone。
+【地域（Region）】不同 Region通常距离较远，而在 OceanBase 数据库中，一份数据可以被部署在多个 Region 中的不同副本上，以保证数据的高可用性和容错性。
+【地域（Region）】每个 Region 都是一个物理数据中心的地理区域，不同地域之间是完全隔离的，以确保系统在不同地域间具备最高程度的稳定性和容错能力。
+【地域/互联数据中心（Region/IDC）】每台 OBServer 服务器都具有 region/IDC 属性，其中 region 记录 OceanBase 集群地域信息，通常代表一个城市，IDC 记录 OceanBase 集群的机房信息。
+【地域/互联数据中心（Region/IDC）】一个 OceanBase 集群包含若干个 region，每个 region 包含若干个 IDC，每个 IDC 部署若干个 OBServer 服务器。
+【地域/互联数据中心（Region/IDC）】根据不同 region 和 IDC，OceanBase 客户端与 OBServer 服务器，或者 OBServer 服务器 OBServer 服务器之间的位置关系可以分为 3 种：同 region 同 IDC、同 region 不同 IDC 和不同 region。
+【地域/互联数据中心（Region/IDC）】三者优先级依次降低。
+【冻结 MemTable（Frozen MemTable）】Active MemTable 达到一定的内存阈值，进行冻结生成冻结 MemTable，冻结的 MemTable 不能再写入增量数据。
+【读写 Zone/只读 Zone】传统的读写分离架构中，写库与读库是完全不同的数据库实体，它们天然是隔离的，通过数据同步工具实时同步。
+【读写 Zone/只读 Zone】OceanBase 数据库通过只读副本和只读 Zone 的功能，实现了单个数据库实体下的读写分离支持。
+【读写 Zone/只读 Zone】其中，读写 Zone 可以接受任何读写请求，只读 Zone 只能接受"登录认证/弱一致性读请求/select 不指定表名的请求 /use database/set session variables 语句"。
+【读写 Zone/只读 Zone】从 V2.2.3 版本不再支持只读 Zone 功能。
+【对象存储（Object Storage）】用于存储非结构化数据的数据存储架构，它将数据划分为单元（对象），并存储在结构扁平的数据环境中。
+【对象存储（Object Storage）】每个对象都包含数据以及应用可用于轻松访问和检索对象的元数据和唯一标识符。
+【对象存储（Object Storage）】对象存储解决方案非常适合用于构建需要扩展和灵活性的云原生应用程序。
+【多级缓存（Multi-level Cache）】为提升性能，OceanBase 数据库支持了多级的缓存系统，对于查询提供针对数据微块的 Block Cache，针对每个 SSTable 的 Row Cache，针对查询熔合结果的 Fuse Row Cache，针对插入判空检查的 Bloomfilter cache 等，同一个租户下的所有缓存共享内存，当 MemTable 写入速度过快时，可以灵活的从当前各种缓存对象中挤占内存给写入使用。
+【多租户（Multi-tenant）】在 OceanBase 数据库中，每一个租户即一个实例（类比 MySQL Instance），在一个 OceanBase 数据库中允许创建多个实例，即多租户。
+【二级索引（Secondary Index）】访问数据表的一种辅助数据结构。
+【二级索引（Secondary Index）】与主键不同，二级索引通常包括由用户显式或隐式指定的一组键值。
+【二级索引（Secondary Index）】在 OceanBase 数据库中，二级索引一般实现为与主表关联的数据表。
+【反向增量（Reverse Incremental）】反向增量是指在数据迁移过程中，从目标系统到源系统传输数据的一种方式，即将在目标系统上发生的更改反向传输回源系统。
+【访问路径（Access Path）】数据库中访问某张表的特定方式，通常分为主键访问和二级索引访问。
+【分布式事务（Distributed Transaction）】OceanBase 数据库的事务类型由事务 Session 位置和事务涉及的日志流 Leader 数量两个维度来决定，主要分为分布式事务和单日志流事务。
+【分布式事务（Distributed Transaction）】以下两种场景的事务均称为分布式事务：事务涉及的日志流数量大于一个；事务涉及的日志流数量只有一个，且日志流的 Leader 和事务 Session 位置不在同一个 server 上。
+【分布式计划（Distributed Plan）】当执行计划涉及到多表或多分区时，该计划为分布式计划。
+【分布式执行（Distributed Execution）】执行计划在多台数据库服务器上执行，每台服务器完成其中的一部分工作。
+【分片（Tablet）】OceanBase 数据库 V4.0.0 版本引入了 Tablet 概念来表示实际的数据存储对象。
+【分片（Tablet）】它具备存储数据的能力，支持在机器之间迁移（transfer），是数据均衡的最小单位。
+【分片（Tablet）】Tablet 与分区一一对应，单分区表会创建一个Tablet，多分区表会为每个分区创建一个 Tablet。
+【分片（Tablet）】索引表的每个分区也会对应一个 Tablet，包括局部索引表和全局索引表。
+【分片（Tablet）】特别地，局部索引表的 Tablet 与主表 Tablet 会强制绑定，保证存储在一台机器上。
+【分区（Partition）】与 Oracle 中 Partition 的概念相同，在 OceanBase 数据库中只有水平分区，表的每一个分区包含一部分记录。
+【分区（Partition）】根据行数据到分区的映射关系不同，分为 Hash 分区、Range 分区（按范围）和 List 分区等。
+【分区（Partition）】每一个分区，还可以用不同的维度再分为若干分区，叫做二级分区。
+【分区（Partition）】例如，交易记录表，按照用户 ID 分为若干 Hash 分区，每个一级 Hash 分区再按照交易时间分为若干二级 Range 分区。
+【分区表 （Patition Table）】OBServer 可以将普通表的数据按照一定规则划分到不同区块内，同一区块内的数据物理上存储在一起，这种划分区块的表叫做"分区表"。
+【分区裁剪（Partition Pruning）】数据库根据查询条件，避免访问无关分区的优化过程。
+【分区裁剪（Partition Pruning）】分区裁剪可以分为静态和动态两种类型。
+【分区键 （Partition Key）】数据表的每一行中用于计算这一行属于哪个分区的列的集合，叫做分区键。
+【分区键 （Partition Key）】当前分区表支持一级分区和二级分区两种。
+【分区键 （Partition Key）】由分区键构成的用于计算该行属于哪个分区的表达式，叫做分区表达式。
+【分区键 （Partition Key）】如果是非分区表，那么一张表对应一个分区；如果是分区表，则一张表对应多个分区。
+【分区键 （Partition Key）】分区类型支持：KEY、HASH、LIST、RANGE。
+【分区键 （Partition Key）】分区键数据类型支持：数值、字符串、Date、Timestamp、二进制、ROWID。
+【分区副本（Partition replica）】在数据库节点（OBServer 节点）组成的集群中，所有的数据以分区为单位存储并提供高可用的服务能力，每个分区有多个副本，称为分区副本。
+【分区转移（Transfer）】分区转移（transfer）是指将分区从一个日志流转移到另一个日志流。
+【分区转移（Transfer）】配合日志流的迁移等能力，用以实现租户内资源扩缩容和负载均衡。
+【分页保序】分页保序是通过对查询结果进行排序，然后再进行分页处理的方式来保持查询结果的顺序一致。
+【分页保序】对于给定的查询语句，首先确定排序规则，通常是基于一个或多个字段进行排序，然后在原始查询语句的基础上添加 ORDER BY 子句，按照排序规则对查询结果进行排序。
+【分页保序】最后再使用 LIMIT 子句来指定分页的起始位置和返回的记录数量。
+【分页保序】这样就能确保每次查询结果的顺序是一致的，并按需返回指定页的记录。
+【副本（Replica）】为了数据安全和提供高可用的数据服务，每个分区数据在物理上存储多份，每一份叫做分区的一个副本。
+【副本（Replica）】每个副本，包括存储在磁盘上的静态数据（SSTable）、存储在内存的增量数据（MemTable）、以及记录事务的日志三类主要的数据。
+【副本（Replica）】根据存储数据种类的不同，副本有几种不同的类型，以支持不同业务在在数据安全、性能伸缩性、可用性、成本等之间的选择。
+【副本（Replica）】全能型副本：也就是目前支持的普通副本，拥有事务日志，MemTable 和 SSTable 等全部完整的数据和功能。它可以随时快速切换为 Leader 对外提供服务。
+【副本（Replica）】日志型副本：只包含日志的副本，没有 MemTable 和 SSTable。它参与日志投票并对外提供日志服务，可以参与其他副本的恢复，但自己不能变为主提供数据库服务。
+【副本（Replica）】只读型副本：包含完整的日志，MemTable 和 SSTable 等，但是它的日志比较特殊。它不作为 Paxos 成员参与日志的投票，而是作为一个观察者实时追赶 Paxos 成员的日志，并在本地回放。这种副本可以在业务对读取数据的一致性要求不高的时候提供只读服务。因其不加入 Paxos 成员组，又不会造成投票成员增加导致事务提交延时的增加。
+【副本（Replica）】副本根据负载和特定的策略，由系统自动调度分散在多个 Server 上。
+【副本（Replica）】副本支持迁移、复制、增删、类型转换等管理操作。
+【副本（Replica）】OceanBase 数据库 V4.0.0 和 V4.1.0 版本当前仅支持全能型副本。
+【负载均衡（Load Balance）】系统根据一定的策略，通过动态调整 Unit 的位置和 Unit 内副本的位置，使得同一个 Zone 内所有 server 的资源使用率达到均衡的过程。
+【负载均衡（Load Balance）】负载均衡策略要考虑很多因素，目前分为两级调度。
+【复制（Replication）】一种数据库复制技术，可以将数据库中的写入操作复制到多个从节点上，从而提高数据库的读取性能和可用性。
+【复制表（Replicated Table）】为应对应用访问频率高更新低频率同时总能访问到最新数据的小表访问需求，同时要保证数据一致性，目前只能选择强一致性读访问 Leader 数据的方案。但由于访问频率高，Leader 容易成为性能瓶颈。
+【复制表（Replicated Table）】为了解决"小表广播"需求场景问题，OceanBase 数据库结合自身架构提供了复制表功能，将相关小表的副本复制到表所属租户的所有 OBServer 上。该表称为复制表，这些副本称为复制副本。复制表的更新事务在提交时保证将数据同步到所有的全功能副本及复制副本，确保在更新事务 commit 成功之后，在租户任意 OBServer 上能读到该事务修改的数据。
+【Fuse Row Cache】在 LSM-Tree 架构中，同一行的修改可能存在于不同的 SSTable 中，OceanBase 数据库为了进一步优化存储占用，每次用户的更新都只会存储增量数据，因此在查询时需要对各个 SSTable 查询的结果进行熔合，当用户不再触发新的更新时，这个熔合结果对查询都是一直有效的，因此 OceanBase 数据库也提供了对于熔合结果缓存的 Fuse Row Cache，更大幅度支持部分用户的热点行查询。
+【Fuse Row Cache】该功能类似于 Oracle 的 Result Cache 和 MySQL的 Query Cache，都可以在查询相同数据时快速返回结果，从而减少数据库的负载和提升查询性能。
+【高可用（High Availability）】一个系统或服务在一定时间内保持高可用性的能力，即系统或服务能够持续地、无中断地运行并提供所需的服务。
+【Granule】分布式并行执行计划中，对于表和索引扫描的最小工作任务粒度，可以是一个分区，或者是一个 query range。
+【工作线程（Worker Threads）】OceanBase 数据库中用以处理租户请求的线程。
+【工作线程（Worker Threads）】属于同一个租户的一组工作线程通过共享一个任务队列来服务用户的请求。
+【故障切换（Failover）】数据库主备库进行切换的一种切换方式。
+【故障切换（Failover）】当数据库提供服务的主库出现故障或意外导致无法提供服务时，切换提供服务的集群为物理备库，该过程不可逆。
